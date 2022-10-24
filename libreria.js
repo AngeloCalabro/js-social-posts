@@ -42,6 +42,15 @@ function addElementClassHTML(tagElement, className, fatherElement) {
     return tag;
 }
 
+// funzione per calcolare date differenti
+// function dateDiffInDays(a, b) {
+//     // Esclude l'ora ed il fuso orario
+//     let utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+//     let utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+//     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+// }
+
 // funzione play carosello con due bottoni prev & next
 // function playCarousel({
 //     sliderItems[activeIndex].classList.remove('active');
