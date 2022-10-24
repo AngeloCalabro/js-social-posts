@@ -55,3 +55,81 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+// collegamento al container della pagina
+const container = document.getElementById('container');
+
+// creazione template da js
+const post = document.createElement('div');
+post.className = 'post';
+container.appendChild(post);
+
+const postHeader = document.createElement('div');
+postHeader.className = 'post__header';
+post.appendChild(postHeader);
+
+
+const postMeta = document.createElement('div');
+postMeta.className = 'post-meta';
+postHeader.appendChild(postMeta);
+
+const postMetaIcon = document.createElement('div');
+postMetaIcon.className = 'post-meta__icon';
+postMeta.appendChild(postMetaIcon);
+postMetaIcon.innerHTML = `
+<img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="Phil Mangione">`;
+
+const postMetaData = document.createElement('div');
+postMetaData.className = 'post-meta__data';
+postMeta.appendChild(postMetaData);
+
+const postMetaAuthor = document.createElement('div');
+postMetaAuthor.className = 'post-meta__author';
+postMetaData.appendChild(postMetaAuthor);
+postMetaAuthor.innerHTML = 'Phil Mangione';
+
+const postMetaTime = document.createElement('div');
+postMetaTime.className = 'post-meta__time';
+postMetaData.appendChild(postMetaTime);
+postMetaTime.innerHTML = '4 mesi fa';
+
+const postText = document.createElement('div');
+postText.className = 'post__text';
+post.appendChild(postText);
+postText.innerHTML = 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.';
+
+const postImage = document.createElement('div');
+postImage.className = 'post__image';
+post.appendChild(postImage);
+postImage.innerHTML = '<img src="https://unsplash.it/600/300?image=171" alt="">';
+
+const postFooter = document.createElement('div');
+postFooter.className = 'post__footer';
+post.appendChild(postFooter);
+
+const jsLike = document.createElement('div');
+jsLike.className = 'likes js-likes';
+postFooter.appendChild(jsLike);
+
+const likeCta = document.createElement('div');
+likeCta.className = 'likes__cta';
+jsLike.appendChild(likeCta);
+likeCta.innerHTML = `
+<a class="like-button  js-like-button" href="#" data-postid="1">
+<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+<span class="like-button__label">Mi Piace</span>
+</a>`;
+
+const likesCounter = document.createElement('div');
+likesCounter.className = 'likes__counter';
+jsLike.appendChild(likesCounter);
+likesCounter.innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone`
+
+console.log(post);
+
+
+
+// for (let i = 0; posts.length; i++) {
+//     itemsContent = `
+
+//     `
+// }
