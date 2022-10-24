@@ -126,7 +126,7 @@ for (let value of posts) {
     likeCta.className = 'likes__cta';
     jsLike.appendChild(likeCta);
     likeCta.innerHTML = `
-    <a class="like-button js-like-button" href="#" data-postid="1">
+    <a class="like-button js-like-button" href="#" data-postid="${value.id}">
     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
     <span class="like-button__label">Mi Piace</span>
     </a>`;
@@ -134,26 +134,29 @@ for (let value of posts) {
     const likesCounter = document.createElement('div');
     likesCounter.className = 'likes__counter';
     jsLike.appendChild(likesCounter);
-    likesCounter.innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${value.likes}</b> persone`;
-    console.log(posts);
-
+    likesCounter.innerHTML = `Piace a <b id="like-counter-${value.id}" class="js-likes-counter">${value.likes}</b> persone`;
+    // console.log(posts);    
 };
 
 // Prendo il tasto LIKE
 const btnLike = document.querySelectorAll('a.like-button');
-// Cambia colore in base al clik sul tasto LIKE
-for (let element of btnLike) {
-    element.addEventListener('click', clickOnLike);
+
+for (let button of btnLike) {
+    button.addEventListener('click', clickLike);
 }
-function clickOnLike() {
+// Cambia colore in base al click sul tasto LIKE
+function clickLike() {
+    const numbOfLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
+    console.log(numbOfLikes);
     if (!this.classList.contains('like-button--liked')) {
         this.classList.add('like-button--liked');
-        likesCounterInnerHtml += 1;
-        likesCounter.item(0).innerHTML = likesCounterInnerHtml;
+        let numb = parseInt(numbOfLikes.textContent);
+        numb++;
+        numbOfLikes.textContent = numb
     } else {
         this.classList.remove('like-button--liked');
-        likesCounterInnerHtml = likesCounterInnerHtml - 1;
-        likesCounter.item(0).innerHTML = likesCounterInnerHtml;
+        let numb = parseInt(numbOfLikes.textContent);
+        numb--;
+        numbOfLikes.textContent = numb
     }
-    console.log(likesCounterInnerHtml);
 }
