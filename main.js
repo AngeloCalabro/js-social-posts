@@ -55,13 +55,16 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
-// collegamento al container della pagina
+
+// Collegamento al container della pagina
 const container = document.getElementById('container');
+
+// Data di oggi
 let data = new Date();
 let gg, mm, aaaa;
-gg = data.getDate()
+gg = data.getDate();
 mm = data.getMonth() + 1 + "-";
-aaaa = data.getFullYear() + "-";;
+aaaa = data.getFullYear() + "-";
 let dataPresent = aaaa + mm + gg
 console.log(dataPresent);
 
@@ -135,3 +138,22 @@ for (let value of posts) {
     console.log(posts);
 
 };
+
+// Prendo il tasto LIKE
+const btnLike = document.querySelectorAll('a.like-button');
+// Cambia colore in base al clik sul tasto LIKE
+for (let element of btnLike) {
+    element.addEventListener('click', clickOnLike);
+}
+function clickOnLike() {
+    if (!this.classList.contains('like-button--liked')) {
+        this.classList.add('like-button--liked');
+        likesCounterInnerHtml += 1;
+        likesCounter.item(0).innerHTML = likesCounterInnerHtml;
+    } else {
+        this.classList.remove('like-button--liked');
+        likesCounterInnerHtml = likesCounterInnerHtml - 1;
+        likesCounter.item(0).innerHTML = likesCounterInnerHtml;
+    }
+    console.log(likesCounterInnerHtml);
+}
