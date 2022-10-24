@@ -62,15 +62,25 @@ const container = document.getElementById('container');
 // Data di oggi
 let data = new Date();
 let gg, mm, aaaa;
-gg = data.getDate();
-mm = data.getMonth() + 1 + "-";
-aaaa = data.getFullYear() + "-";
-let dataPresent = aaaa + mm + gg
-console.log(dataPresent);
-
+gg = data.getDate() + "/";
+mm = data.getMonth() + 1 + "/";
+aaaa = data.getFullYear();
+console.log("Oggi è il " + gg + mm + aaaa);
 
 for (let value of posts) {
-    // creazione template da js
+    // Confronto date tra oggi e le date value.created
+    let currentTime = new Date();
+    let created = new Date(value.created);
+
+    let time = currentTime.getMonth() - created.getMonth();
+    // console.log(time);
+
+    // Prendi la prima lettera del nome e del cognome
+    let firstLetters = value.author.name.split(' ').map(word => word[0]).join('');
+
+    let iconProfile = (value.author.image == null) ? `<div class='profile-pic-default'><span>${firstLetters}</span></div>` : `<img class="profile-pic" src="${value.author.image}" alt="${value.author.name}"> `;
+
+    // Creazione template da js
     const post = document.createElement('div');
     post.className = 'post';
     container.appendChild(post);
@@ -79,7 +89,6 @@ for (let value of posts) {
     postHeader.className = 'post__header';
     post.appendChild(postHeader);
 
-
     const postMeta = document.createElement('div');
     postMeta.className = 'post-meta';
     postHeader.appendChild(postMeta);
@@ -87,8 +96,7 @@ for (let value of posts) {
     const postMetaIcon = document.createElement('div');
     postMetaIcon.className = 'post-meta__icon';
     postMeta.appendChild(postMetaIcon);
-    postMetaIcon.innerHTML = `
-    <img class="profile-pic" src="${value.author.image}" alt="${value.author.name}">`;
+    postMetaIcon.innerHTML = `${iconProfile}`;
 
     const postMetaData = document.createElement('div');
     postMetaData.className = 'post-meta__data';
@@ -102,7 +110,7 @@ for (let value of posts) {
     const postMetaTime = document.createElement('div');
     postMetaTime.className = 'post-meta__time';
     postMetaData.appendChild(postMetaTime);
-    postMetaTime.innerHTML = `${value.created}`;
+    postMetaTime.innerHTML = `${time} mese/i fa`;
 
     const postText = document.createElement('div');
     postText.className = 'post__text';
@@ -152,11 +160,11 @@ function clickLike() {
         this.classList.add('like-button--liked');
         let numb = parseInt(numbOfLikes.textContent);
         numb++;
-        numbOfLikes.textContent = numb
+        numbOfLikes.textContent = numb;
     } else {
         this.classList.remove('like-button--liked');
         let numb = parseInt(numbOfLikes.textContent);
         numb--;
-        numbOfLikes.textContent = numb
+        numbOfLikes.textContent = numb;
     }
-}
+};
