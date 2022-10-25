@@ -59,6 +59,9 @@ const posts = [
 // Collegamento al container della pagina
 const container = document.getElementById('container');
 
+// Array di like
+const userLiked = [];
+
 // Data di oggi
 let data = new Date();
 let gg, mm, aaaa;
@@ -120,7 +123,7 @@ for (let value of posts) {
     const postImage = document.createElement('div');
     postImage.className = 'post__image';
     post.appendChild(postImage);
-    postImage.innerHTML = `<img src="${value.media}" alt="">`;
+    postImage.innerHTML = `<img src="${value.media}" alt="${value.id}">`;
 
     const postFooter = document.createElement('div');
     postFooter.className = 'post__footer';
@@ -148,23 +151,32 @@ for (let value of posts) {
 
 // Prendo il tasto LIKE
 const btnLike = document.querySelectorAll('a.like-button');
+// console.log(btnLike);
 
 for (let button of btnLike) {
     button.addEventListener('click', clickLike);
 }
-// Cambia colore in base al click sul tasto LIKE
-function clickLike() {
-    const numbOfLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
-    console.log(numbOfLikes);
+
+// Cambia colore in base al click sul tasto LIKE e incrementa Likes
+function clickLike(e) {
+    // prendo ID post dal dataset
+    const numbLikes = document.querySelector(`#like-counter-${this.dataset.postid}`);
+    console.log(numbLikes);
     if (!this.classList.contains('like-button--liked')) {
         this.classList.add('like-button--liked');
-        let numb = parseInt(numbOfLikes.textContent);
+        let numb = parseInt(numbLikes.textContent);
         numb++;
-        numbOfLikes.textContent = numb;
+        numbLikes.textContent = numb;
+        userLiked.push(numbLikes);
     } else {
         this.classList.remove('like-button--liked');
-        let numb = parseInt(numbOfLikes.textContent);
+        let numb = parseInt(numbLikes.textContent);
         numb--;
-        numbOfLikes.textContent = numb;
+        numbLikes.textContent = numb;
+        userLiked.splice(numbLikes, 1);
     }
+    // evito che venga lanciato l'evento di default
+    e.preventDefault();
+
+    console.log(userLiked)
 };
